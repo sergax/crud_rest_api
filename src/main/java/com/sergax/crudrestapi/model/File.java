@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -18,8 +15,13 @@ import javax.persistence.Table;
 public class File {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long file_id;
 
-    @Column (name = "file_name")
+    @Column(name = "file_name")
     private String name;
+
+    @OneToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
 }

@@ -1,4 +1,4 @@
-package com.sergax.crudrestapi.util;
+package com.sergax.crudrestapi.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,8 +19,8 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-    public static void shutdown() {
-        // Clean cash and close connection DB
-        getSessionFactory().close();
-    }
+//    public static void shutdown() {
+//        // Clean cash and close connection DB
+//        getSessionFactory().close();
+//    }
 }

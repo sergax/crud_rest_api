@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -17,8 +14,16 @@ import javax.persistence.Table;
 public class Event {
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long event_id;
 
     @Column(name = "event_name")
     private String eventName;
+
+    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+    private File file;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

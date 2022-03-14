@@ -5,7 +5,7 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/crud_rest_api</property>
         <property name="hibernate.connection.username">user</property>
@@ -16,5 +16,7 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.sergax.crudrestapi.model.User"/>
+        <mapping class="com.sergax.crudrestapi.model.File"/>
+        <mapping class="com.sergax.crudrestapi.model.Event"/>
     </session-factory>
 </hibernate-configuration>
