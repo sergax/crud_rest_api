@@ -20,10 +20,11 @@ public class Event {
     @Column(name = "event_name")
     private String eventName;
 
-    @OneToOne(mappedBy = "event", cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "file_id")
     private File file;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }

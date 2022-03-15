@@ -20,9 +20,8 @@ import java.util.List;
  * UserServlet that acts as a page controller to handle all requests from the client
  */
 
-@WebServlet("/")
-public class userServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@WebServlet("/user-form")
+public class UserServlet extends HttpServlet {
     private UserService userService = new UserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -75,7 +74,7 @@ public class userServlet extends HttpServlet {
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         String name = request.getParameter("name");
-        User newUser = new User(null, name, new ArrayList<>());
+        User newUser = new User(null, name, "", new ArrayList<>());
         userService.create(newUser);
         response.sendRedirect("list");
     }
@@ -84,7 +83,7 @@ public class userServlet extends HttpServlet {
             throws SQLException, IOException {
         Long id = Long.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
-        User updatedUser = new User(id, name, new ArrayList<>());
+        User updatedUser = new User(id, name,"", new ArrayList<>());
         userService.update(updatedUser);
         response.sendRedirect("list");
     }

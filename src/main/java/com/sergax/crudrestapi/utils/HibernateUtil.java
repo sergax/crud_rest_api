@@ -19,8 +19,8 @@ public class HibernateUtil {
         return sessionFactory;
     }
 
-//    public static void shutdown() {
-//        // Clean cash and close connection DB
-//        getSessionFactory().close();
-//    }
+    public static void shutdown() {
+        // Clean cash and close connection DB
+        getSessionFactory().close();
+    }
 }

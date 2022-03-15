@@ -30,13 +30,13 @@
 
 
     <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
+        <servlet-name>UserServlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>servlets.userServlet</servlet-class>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>servlets.UserServlet</servlet-class>
     </servlet>
 
 </web-app>

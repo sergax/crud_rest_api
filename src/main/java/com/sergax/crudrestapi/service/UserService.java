@@ -33,4 +33,8 @@ public class UserService implements UserDao {
     public void delete(Long id) {
         userDao.delete(id);
     }
+
+    public boolean validate(String name, String password) {
+        return userDao.validate(name, password);
+    }
 }

@@ -28,7 +28,7 @@ public class EventService implements EventDao {
     public void update(Event event) {
         eventDao.update(event);
     }
-
+    
     @Override
     public void delete(Long id) {
         eventDao.delete(id);
