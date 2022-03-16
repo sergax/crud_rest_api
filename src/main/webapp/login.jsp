@@ -8,8 +8,8 @@
 </head>
 <body>
  <div align="center">
-  <h1>Employee Login Form</h1>
-  <form action="<%=request.getContextPath()%>/login" method="post">
+  <h1>Login Form</h1>
+  <form action="<%=request.getContextPath()%>/" method="post">
    <table style="with: 100%">
     <tr>
      <td>UserName</td>
@@ -19,7 +19,6 @@
      <td>Password</td>
      <td><input type="password" name="password" /></td>
     </tr>
-
    </table>
    <input type="submit" value="Submit" />
   </form>
