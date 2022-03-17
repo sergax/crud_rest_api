@@ -35,7 +35,7 @@ public class EventDaoImpl implements EventDao {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            eventList = session.createQuery("FROM Event").getResultList();
+            eventList = session.createQuery("FROM Event LEFT JOIN User").getResultList();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {

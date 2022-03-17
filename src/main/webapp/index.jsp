@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
- pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +7,7 @@
 <body>
  <div align="center">
   <h1>Login Form</h1>
-  <form action="<%=request.getContextPath()%>/login" method="post">
+  <form action="<%=request.getContextPath()%>/index" method="post">
    <table style="with: 100%">
     <tr>
      <td>UserName</td>
@@ -21,6 +19,7 @@
     </tr>
    </table>
    <input type="submit" value="Submit" />
+
   </form>
  </div>
 </body>

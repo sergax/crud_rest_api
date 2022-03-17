@@ -7,46 +7,4 @@
 
     <display-name>REST API project</display-name>
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>LoginController</servlet-name>-->
-<!--        <url-pattern>/login</url-pattern>-->
-<!--    </servlet-mapping>-->
-
-<!--    <servlet>-->
-<!--        <servlet-name>LoginController</servlet-name>-->
-<!--        <servlet-class>servlets.LoginController</servlet-class>-->
-<!--    </servlet>-->
-
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>EventServlet</servlet-name>-->
-<!--        <url-pattern>/events</url-pattern>-->
-<!--    </servlet-mapping>-->
-
-<!--    <servlet>-->
-<!--        <servlet-name>EventServlet</servlet-name>-->
-<!--        <servlet-class>servlets.EventServlet</servlet-class>-->
-<!--    </servlet>-->
-
-
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>FileServlet</servlet-name>-->
-<!--        <url-pattern>/login/files</url-pattern>-->
-<!--    </servlet-mapping>-->
-
-<!--    <servlet>-->
-<!--        <servlet-name>FileServlet</servlet-name>-->
-<!--        <servlet-class>servlets.FileServlet</servlet-class>-->
-<!--    </servlet>-->
-
-
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>servlets.UserServlet</servlet-class>
-    </servlet>
-
 </web-app>

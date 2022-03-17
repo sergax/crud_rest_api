@@ -3,13 +3,25 @@ package com.sergax.crudrestapi.dao.daoImpl;
 import com.sergax.crudrestapi.dao.FileDao;
 import com.sergax.crudrestapi.model.Event;
 import com.sergax.crudrestapi.model.File;
+import com.sergax.crudrestapi.model.User;
 import com.sergax.crudrestapi.utils.HibernateUtil;
+import com.sergax.crudrestapi.utils.JDBCUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.xml.transform.Result;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileDaoImpl implements FileDao {
+    private final static String GET_ALL_FILES_BY_USER = "SELECT file_id, file_name " +
+            "FROM file " +
+            "LEFT JOIN event USING(file_id) " +
+            "LEFT JOIN user USING(user_id) " +
+            "WHERE user_id = ?";
     private EventDaoImpl eventDao;
     private Transaction transaction = null;
     private File file = null;
@@ -31,11 +43,11 @@ public class FileDaoImpl implements FileDao {
 
     @Override
     public List<File> getAll() {
-        List<File> eventList = null;
+        List<File> fileList = new ArrayList<>();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            eventList = session.createQuery("FROM File").getResultList();
+            fileList = session.createSQLQuery("FROM Files").getResultList();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -43,7 +55,29 @@ public class FileDaoImpl implements FileDao {
             }
             ex.printStackTrace();
         }
-        return eventList;
+        return fileList;
+    }
+
+    public List<File> getAllByID() {
+        List<File> fileList = new ArrayList<>();
+        User user = new User();
+
+        try (PreparedStatement preparedStatement = JDBCUtil.
+                getConnection().
+                prepareStatement(GET_ALL_FILES_BY_USER)) {
+            preparedStatement.setLong(1, user.getUser_id());
+            System.out.println(preparedStatement);
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+                File newFile = new File();
+                newFile.setFile_id(result.getLong("file_id"));
+                newFile.setNameFile(result.getString("file_name"));
+                fileList.add(newFile);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fileList;
     }
 
     @Override

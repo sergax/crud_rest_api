@@ -1,15 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
- <title>User</title>
+ <title>File Management</title>
 </head>
 <body>
  <center>
-  <h1>Fie Management</h1>
+  <h1>File Management</h1>
         <h2>
-         <a href="file/new">Add New File</a>
+         <a href="new">Add New File</a>
          &nbsp;&nbsp;&nbsp;
-         <a href="file/list">List All Files</a>
+         <a href="list">List All Files</a>
         </h2>
  </center>
     <div align="center">
@@ -30,11 +32,11 @@
               </c:if>
              </h2>
             </caption>
-          <c:if test="${user != null}">
+          <c:if test="${file != null}">
            <input type="hidden" name="id" value="<c:out value='${file.file_id}' />" />
           </c:if>
             <tr>
-                <th>User Name: </th>
+                <th>File Name: </th>
                 <td>
                  <input type="text" name="name" size="45"
                    value="<c:out value='${file.fileName}' />"

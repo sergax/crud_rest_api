@@ -16,10 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * UserServlet that acts as a page controller to handle all requests from the client
- */
-//@WebServlet("/")
+//@WebServlet(name = "UserServlet", urlPatterns = "/user")
+//@WebServlet(name = "UserServlet", urlPatterns = "/")
 public class UserServlet extends HttpServlet {
     private UserService userService = new UserService();
 

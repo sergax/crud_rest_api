@@ -1,7 +1,7 @@
 package com.sergax.crudrestapi.servlets;
 
+import com.sergax.crudrestapi.dao.daoImpl.FileDaoImpl;
 import com.sergax.crudrestapi.model.File;
-import com.sergax.crudrestapi.model.User;
 import com.sergax.crudrestapi.service.FileService;
 
 import javax.servlet.RequestDispatcher;
@@ -15,9 +15,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet( urlPatterns = "/file/")
+@WebServlet(name = "FileServlet", urlPatterns = "/")
 public class FileServlet extends HttpServlet {
     private FileService fileService = new FileService();
+    private FileDaoImpl fileDao = new FileDaoImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,8 +45,8 @@ public class FileServlet extends HttpServlet {
 
     public void listFile(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List<File> listFiles = fileService.getAll();
-        request.setAttribute("listFile", listFiles);
+        List<File> listFile = fileDao.getAllByID();
+        request.setAttribute("listFile", listFile);
         RequestDispatcher dispatcher = request.getRequestDispatcher("file-list.jsp");
         dispatcher.forward(request, response);
     }

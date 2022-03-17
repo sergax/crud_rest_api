@@ -1,15 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 <head>
- <title>Files</title>
+<meta charset="ISO-8859-1">
+ <title>File Management</title>
 </head>
 <body>
  <center>
   <h1>Files Management</h1>
         <h2>
-         <a href="file/new">Add New File</a>
+         <a href="new">Add New File</a>
           &nbsp;&nbsp;&nbsp;
+         <a href="list">List All Files</a>
         </h2>
  </center>
     <div align="center">
@@ -20,10 +23,10 @@
                 <th>Name</th>
                 <th>Options</th>
             </tr>
-            <c:forEach var="file" items="${listFile}">
+            <c:forEach var="file" items="${listFiles}">
                 <tr>
                     <td><c:out value="${file.file_id}" /></td>
-                    <td><c:out value="${file.fileName}" /></td>
+                    <td><c:out value="${file.nameFile}" /></td>
                     <td>
                      <a href="edit?id=<c:out value='${file.file_id}' />">Edit</a>
                      &nbsp;&nbsp;&nbsp;&nbsp;

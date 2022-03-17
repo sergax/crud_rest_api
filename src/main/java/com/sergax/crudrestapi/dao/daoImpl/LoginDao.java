@@ -21,7 +21,6 @@ public class LoginDao {
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             status = rs.next();
-
         } catch (SQLException e) {
             printSQLException(e);
         }

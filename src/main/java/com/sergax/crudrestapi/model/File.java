@@ -20,7 +20,7 @@ public class File {
     private Long file_id;
 
     @Column(name = "file_name")
-    private String name;
+    private String nameFile;
 
     @OneToMany(mappedBy = "file", cascade = CascadeType.ALL)
     private List<Event> eventList;
