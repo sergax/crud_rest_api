@@ -6,6 +6,7 @@ import com.sergax.crudrestapi.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,28 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            user = session.get(User.class, id);
-            transaction.commit();
+            Query query = session.createQuery("FROM User WHERE id=:id");
+            query.setParameter("id", id);
+            List userList = query.getResultList();
+            user = (User) userList.get(0);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+        return user;
+    }
+
+    public User getByUsername(String username) {
+        User user = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("FROM User u WHERE userName = :userName");
+            query.setParameter("username", username);
+            List users = query.getResultList();
+            if (users.isEmpty()) {
+                return null;
+            }
+            user = (User) users.get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return user;
     }
@@ -43,7 +61,7 @@ public class UserDaoImpl implements UserDao {
     public void create(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(user);
+            session.persist(user);
             transaction.commit();
         } catch (Exception ex) {
             ex.printStackTrace();

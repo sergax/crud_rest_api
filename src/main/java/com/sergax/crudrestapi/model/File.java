@@ -17,11 +17,19 @@ public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "file_id")
     private Long file_id;
 
     @Column(name = "file_name")
-    private String nameFile;
+    private String fileName;
 
-    @OneToMany(mappedBy = "file", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "file_id")
     private List<Event> eventList;
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "event", joinColumns = @JoinColumn(name = "file_id"),
+//            inverseJoinColumns = @JoinColumn(name = "user_id"))
+//    private  List<User> usersList;
 }

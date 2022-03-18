@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 
         try {
             if (loginDao.validate(loginBean)) {
-                response.sendRedirect("file");
+                response.sendRedirect("event");
             } else {
                 response.sendRedirect("error.jsp");
             }

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "FileServlet", urlPatterns = "/")
+@WebServlet(name = "FileServlet", urlPatterns = "/file")
 public class FileServlet extends HttpServlet {
     private FileService fileService = new FileService();
     private FileDaoImpl fileDao = new FileDaoImpl();
@@ -47,13 +47,13 @@ public class FileServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List<File> listFile = fileDao.getAllByID();
         request.setAttribute("listFile", listFile);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("file-list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/file/file-list.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("file-form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/file/file-form.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -61,7 +61,7 @@ public class FileServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
         Long id = Long.valueOf((request.getParameter("id")));
         File existingFile = fileService.getById(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("file-form.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("view/file/file-form.jsp");
         request.setAttribute("file", existingFile);
         dispatcher.forward(request, response);
 

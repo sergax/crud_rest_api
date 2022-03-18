@@ -1,7 +1,6 @@
 package com.sergax.crudrestapi.dao.daoImpl;
 
 import com.sergax.crudrestapi.dao.FileDao;
-import com.sergax.crudrestapi.model.Event;
 import com.sergax.crudrestapi.model.File;
 import com.sergax.crudrestapi.model.User;
 import com.sergax.crudrestapi.utils.HibernateUtil;
@@ -9,7 +8,7 @@ import com.sergax.crudrestapi.utils.JDBCUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.xml.transform.Result;
+import javax.persistence.Query;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,13 +28,11 @@ public class FileDaoImpl implements FileDao {
     @Override
     public File getById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            file = session.get(File.class, id);
-            transaction.commit();
+            Query query = session.createQuery("FROM File WHERE id=:id");
+            query.setParameter("id", id);
+            List fileList = query.getResultList();
+            file = (File) fileList.get(0);
         } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             ex.printStackTrace();
         }
         return file;
@@ -71,7 +68,7 @@ public class FileDaoImpl implements FileDao {
             while (result.next()) {
                 File newFile = new File();
                 newFile.setFile_id(result.getLong("file_id"));
-                newFile.setNameFile(result.getString("file_name"));
+                newFile.setFileName(result.getString("file_name"));
                 fileList.add(newFile);
             }
         } catch (SQLException e) {

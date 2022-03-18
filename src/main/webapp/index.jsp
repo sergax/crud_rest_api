@@ -19,7 +19,7 @@
     </tr>
    </table>
    <input type="submit" value="Submit" />
-
+   <a href="/logout"><Logout></a>
   </form>
  </div>
 </body>

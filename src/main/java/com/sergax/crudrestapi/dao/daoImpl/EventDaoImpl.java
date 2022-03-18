@@ -7,23 +7,23 @@ import com.sergax.crudrestapi.utils.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventDaoImpl implements EventDao {
     private Transaction transaction = null;
-    private Event event = new Event();
+    private Event event = null;
     private UserDaoImpl userDao = new UserDaoImpl();
 
     @Override
     public Event getById(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            event = session.get(Event.class, id);
-            transaction.commit();
+            Query query = session.createQuery("FROM Event WHERE id=:id");
+            query.setParameter("id", id);
+            List eventList = query.getResultList();
+            event = (Event) eventList.get(0);
         } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             ex.printStackTrace();
         }
         return event;
@@ -31,11 +31,13 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public List<Event> getAll() {
-        List<Event> eventList = null;
+        List<Event> eventList = new ArrayList<>();
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//            eventList = session.createSQLQuery("SELECT event_id, event_name, file_name FROM event " +
+//                    "LEFT JOIN file USING(file_id)").getResultList();
             transaction = session.beginTransaction();
-            eventList = session.createQuery("FROM Event LEFT JOIN User").getResultList();
+            eventList = session.createQuery("FROM Event").getResultList();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -46,11 +48,24 @@ public class EventDaoImpl implements EventDao {
         return eventList;
     }
 
+    public List getUsersEvent(User user) {
+        List events = new ArrayList<>();
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+            Query query = session.createQuery("FROM Event WHERE user =: user");
+            query.setParameter("user", user);
+            events = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+
     @Override
     public void create(Event event) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(event);
+            session.persist(event);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
